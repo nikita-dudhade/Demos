@@ -3,6 +3,7 @@ import './studentform.css';
 
 const StudentForm = () => {
     const [formData, setFormData] = useState({
+        Id:'',
         studentName: '',
         age: '',
         contactNumber: '',
@@ -23,7 +24,7 @@ const StudentForm = () => {
         e.preventDefault();
         // API call
         try {
-            const response = await fetch('https://api.example.com/student', {
+            const response = await fetch('http://localhost:8080/student', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -49,11 +50,22 @@ const StudentForm = () => {
             <h2>Student Form</h2>
             <form onSubmit={handleSubmit}>
                 <div>
+
                     <label>Student Name:</label>
                     <input
                         type="text"
                         name="studentName"
                         value={formData.studentName}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
+                <div>
+                    <label>Id:</label>
+                    <input
+                        type="number"
+                        name="Id"
+                        value={formData.Id}
                         onChange={handleChange}
                         required
                     />
