@@ -6,8 +6,11 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,9 +30,14 @@ public class StudentController {
 	@GetMapping
 	public List<Student> getStudent()
 	{
-		return null;
+		return stdService.getStudent();
 	}
 	
+	@GetMapping("id/{id}")
+	public Student getStudentById(@PathVariable int id)
+	{
+		return stdService.getStudentById(id).orElse(null);
+	}
 	
 	@PostMapping
 	public Student createStudent(@RequestBody Student std)
@@ -38,6 +46,19 @@ public class StudentController {
 		
 	}
 	
+	@DeleteMapping("id/{Id}")
+	public boolean deleteStudent(@PathVariable int Id)
+	{
+		 stdService.deleteStudent(Id);
+		 return true;
+	}
+	
+	@PutMapping("id/{Id}")
+	public Student updateStudent(@PathVariable int Id, @RequestBody Student changestd)
+	{
+		return stdService.updateStudent(Id,changestd);
+		
+	}
 	
 	
 }
